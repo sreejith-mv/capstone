@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "693004144126",
+    "project_id": "capstone-74357",
+    "storage_bucket": "capstone-74357.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693004144126:android:9934df84de0eb15b3984af",
+        "android_client_info": {
+          "package_name": "com.edureka.tcs.capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693004144126-t94ft7diiu0e4sifj399vbj8eqs4ms5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm4uskEkyqbKT1Tb75gHoDcnrUATjKyoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693004144126-t94ft7diiu0e4sifj399vbj8eqs4ms5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
