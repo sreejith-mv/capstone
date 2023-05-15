@@ -25,9 +25,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            arguments['name'] == "All Categories"
-                ? getCategoryList()
-                : Container(),
+            arguments['id'] == "all" ? getCategoryList() : Container(),
             ProductGrid(categoryId: categoryId)
           ],
         ),
