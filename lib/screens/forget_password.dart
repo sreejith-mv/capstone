@@ -36,7 +36,6 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
         _navigateToDashboard();
       } on FirebaseAuthException catch (e) {
         String message = '';
-        print(e.message);
         if (e.code == "user-not-found") {
           message = 'User not fount';
         } else {

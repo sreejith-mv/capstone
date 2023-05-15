@@ -77,6 +77,15 @@ flutter:
   assets:
     - assets/images/onboarding.jpg
     - assets/images/logo.png
+    - assets/images/welcome_card.jpg
+    - assets/images/welcome_card_offer.png
+    - assets/images/boots.png
+    - assets/images/kids.png
+    - assets/images/man.png
+    - assets/images/woman.png
+    - assets/images/jewelry.png
+    - assets/images/accessories.png
+    - assets/images/all.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
