@@ -1,3 +1,4 @@
+import 'package:capstone/screens/category.dart';
 import 'package:capstone/widgets/common/category_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class DashboardCategoryList extends StatelessWidget {
             children: snapshot.data!.docs.map<Widget>((DocumentSnapshot doc) {
               return CategoryTile(
                 onTap: () {
-                  Navigator.pushNamed(context, '/category',
+                  Navigator.pushNamed(context, CategoryScreen.path,
                       arguments: {'id': doc.id, 'name': doc['name']});
                 },
                 name: doc['name'],

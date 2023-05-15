@@ -1,3 +1,6 @@
+import 'package:capstone/screens/dashboard.dart';
+import 'package:capstone/screens/forget_password.dart';
+import 'package:capstone/screens/registration.dart';
 import 'package:capstone/widgets/common/elevated_button.dart';
 import 'package:capstone/widgets/common/text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +10,7 @@ import '../theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  static const String path = 'login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -18,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   String _asyncFormErrorMessage = '';
   void _navigateToDashboard() {
-    Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, DashboardScreen.path, (route) => false);
   }
 
   _login() async {
@@ -111,8 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(color: brandColor, fontSize: 16),
                     ),
                     TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/forget-password'),
+                      onPressed: () => Navigator.pushNamed(
+                          context, ForgetPasswordScreen.path),
                       child: const Text(
                         'Reset',
                         style: TextStyle(
@@ -130,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(color: brandColor, fontSize: 16)),
                     TextButton(
                       onPressed: () =>
-                          Navigator.pushNamed(context, '/register'),
+                          Navigator.pushNamed(context, RegistrationScreen.path),
                       child: const Text('Sign up',
                           style: TextStyle(
                               color: brandColor,

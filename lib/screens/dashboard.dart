@@ -5,6 +5,7 @@ import 'package:capstone/widgets/dashboard/welcome_carousel.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
+  static const String path = 'dashboard';
   const DashboardScreen({super.key});
 
   @override

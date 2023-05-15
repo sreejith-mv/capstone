@@ -1,3 +1,4 @@
+import 'package:capstone/screens/cart.dart';
 import 'package:capstone/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,7 @@ class _ShoppingCartIconState extends State<ShoppingCartIcon> {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/cart');
+                  Navigator.pushNamed(context, CartScreen.path);
                 },
                 icon: const Icon(Icons.shopping_cart),
               ),

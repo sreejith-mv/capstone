@@ -1,3 +1,4 @@
+import 'package:capstone/screens/login.dart';
 import 'package:capstone/theme.dart';
 import 'package:capstone/widgets/common/elevated_button.dart';
 import 'package:capstone/widgets/common/text_form_field.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  static const String path = 'registration';
   const RegistrationScreen({super.key});
 
   @override
@@ -23,7 +25,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String _asyncFormErrorMessage = '';
 
   void _backToLogin() {
-    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginScreen.path, (route) => false);
   }
 
   _register() async {

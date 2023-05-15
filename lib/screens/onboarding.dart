@@ -1,9 +1,10 @@
+import 'package:capstone/screens/login.dart';
 import 'package:capstone/widgets/common/elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
-  static String path = 'dashboard';
+  static const String path = 'onboarding';
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,8 @@ class OnboardingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: CapstoneElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/login'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, LoginScreen.path),
                     text: 'Start Shopping'),
               )
             ],

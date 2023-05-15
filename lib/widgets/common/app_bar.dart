@@ -1,3 +1,4 @@
+import 'package:capstone/screens/profile.dart';
 import 'package:capstone/widgets/common/shopping_cart_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class CapstoneAppBar extends StatelessWidget implements PreferredSizeWidget {
         const ShoppingCartIcon(),
         IconButton(
             onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context, '/profile', (route) => false),
+                context, ProfileScreen.path, (route) => false),
             icon: const Icon(Icons.person)),
       ],
     );

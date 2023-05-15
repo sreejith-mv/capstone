@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatefulWidget {
+  static const String path = 'category';
   const CategoryScreen({super.key});
 
   @override
