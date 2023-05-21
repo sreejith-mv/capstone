@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 
 class CapstoneAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CapstoneAppBar({super.key, required this.title});
+  final bool showCart;
+  const CapstoneAppBar({super.key, required this.title, this.showCart = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
       actions: [
-        const ShoppingCartIcon(),
+        showCart ? const ShoppingCartIcon() : Container(),
         IconButton(
-            onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context, ProfileScreen.path, (route) => false),
+            onPressed: () => Navigator.pushNamed(context, ProfileScreen.path),
             icon: const Icon(Icons.person)),
       ],
     );

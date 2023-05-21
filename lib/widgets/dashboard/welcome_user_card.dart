@@ -1,3 +1,6 @@
+import 'package:capstone/screens/address.dart';
+import 'package:capstone/screens/order.dart';
+import 'package:capstone/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +62,22 @@ class _WelcomeUserCardState extends State<WelcomeUserCard> {
                     '${user['firstName']} ${user['lastName']}',
                     style: const TextStyle(
                         fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 80),
+                  Container(
+                    height: 35,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: brandColor,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Orders.path),
+                      child: const Text('View Orders'),
+                    ),
                   )
                 ],
               ),

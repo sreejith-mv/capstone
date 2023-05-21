@@ -15,27 +15,43 @@ class CapstoneTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: brandColor),
-      ),
-      child: TextFormField(
-        obscureText: obscureText,
-        controller: controller,
-        style: const TextStyle(
-          color: brandColor,
+    // return Container(
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(10),
+    //     border: Border.all(color: brandColor),
+    //   ),
+    //   child: TextFormField(
+    //     obscureText: obscureText,
+    //     controller: controller,
+    //     style: const TextStyle(
+    //       color: brandColor,
+    //     ),
+    //     decoration: InputDecoration(
+    //       border: InputBorder.none,
+    //       hintText: hintText,
+    //       hintStyle: const TextStyle(
+    //         color: brandColor,
+    //       ),
+    //       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+    //     ),
+    //     validator: validator,
+    //   ),
+    // );
+    return TextFormField(
+      obscureText: obscureText,
+      controller: controller,
+      style: const TextStyle(color: brandColor),
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: hintText,
+        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+          (Set<MaterialState> states) {
+            return const TextStyle(color: brandColor, letterSpacing: 1.3);
+          },
         ),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hintText,
-          hintStyle: const TextStyle(
-            color: brandColor,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-        ),
-        validator: validator,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       ),
+      validator: validator,
     );
   }
 }

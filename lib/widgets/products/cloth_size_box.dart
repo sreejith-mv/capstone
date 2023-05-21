@@ -1,10 +1,10 @@
+import 'package:capstone/screens/product.dart';
 import 'package:capstone/theme.dart';
 import 'package:flutter/material.dart';
 
 class ClothSizeBox extends StatefulWidget {
-  const ClothSizeBox({
-    super.key,
-  });
+  final OnSizeChange onSizeSelected;
+  const ClothSizeBox({super.key, required this.onSizeSelected});
 
   @override
   State<ClothSizeBox> createState() => _ClothSizeBoxState();
@@ -28,103 +28,38 @@ class _ClothSizeBoxState extends State<ClothSizeBox> {
           const SizedBox(height: 20),
           Row(
             children: [
-              GestureDetector(
-                onTap: () => setState(() {
-                  selectedSize = 'S';
-                }),
-                child: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                      color: selectedSize == 'S' ? brandColor : brandLight,
-                      borderRadius: const BorderRadius.all(Radius.circular(5))),
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    'S',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: selectedSize == 'S' ? brandLight : brandColor),
-                  ),
-                ),
-              ),
+              sizeBox('S'),
               const SizedBox(width: 10),
-              GestureDetector(
-                onTap: () => setState(() {
-                  selectedSize = 'M';
-                }),
-                child: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                      color: selectedSize == 'M' ? brandColor : brandLight,
-                      borderRadius: const BorderRadius.all(Radius.circular(5))),
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    'M',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: selectedSize == 'M' ? brandLight : brandColor),
-                  ),
-                ),
-              ),
+              sizeBox('M'),
               const SizedBox(width: 10),
-              GestureDetector(
-                onTap: () => setState(() {
-                  selectedSize = 'L';
-                }),
-                child: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                      color: selectedSize == 'L' ? brandColor : brandLight,
-                      borderRadius: const BorderRadius.all(Radius.circular(5))),
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    'L',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: selectedSize == 'L' ? brandLight : brandColor),
-                  ),
-                ),
-              ),
+              sizeBox('L'),
               const SizedBox(width: 10),
-              GestureDetector(
-                onTap: () => setState(() {
-                  selectedSize = 'XL';
-                }),
-                child: Container(
-                  width: 30,
-                  decoration: BoxDecoration(
-                      color: selectedSize == 'XL' ? brandColor : brandLight,
-                      borderRadius: const BorderRadius.all(Radius.circular(5))),
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    'XL',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: selectedSize == 'XL' ? brandLight : brandColor),
-                  ),
-                ),
-              ),
+              sizeBox('XL'),
               const SizedBox(width: 10),
-              GestureDetector(
-                onTap: () => setState(() {
-                  selectedSize = 'XXL';
-                }),
-                child: Container(
-                  width: 40,
-                  decoration: BoxDecoration(
-                      color: selectedSize == 'XXL' ? brandColor : brandLight,
-                      borderRadius: const BorderRadius.all(Radius.circular(5))),
-                  padding: const EdgeInsets.all(5),
-                  child: Text(
-                    'XXL',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: selectedSize == 'XXL' ? brandLight : brandColor),
-                  ),
-                ),
-              ),
+              sizeBox('XXL')
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  GestureDetector sizeBox(String size) {
+    return GestureDetector(
+      onTap: () => setState(() {
+        selectedSize = size;
+        widget.onSizeSelected.call(size);
+      }),
+      child: Container(
+        width: 40,
+        decoration: BoxDecoration(
+            color: selectedSize == size ? brandColor : brandLight,
+            borderRadius: const BorderRadius.all(Radius.circular(5))),
+        padding: const EdgeInsets.all(5),
+        child: Text(size,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: selectedSize == size ? brandLight : brandColor)),
       ),
     );
   }

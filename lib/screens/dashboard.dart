@@ -1,6 +1,6 @@
 import 'package:capstone/widgets/common/app_bar.dart';
 import 'package:capstone/widgets/dashboard/category_list.dart';
-import 'package:capstone/widgets/dashboard/top_setting_grid.dart';
+import 'package:capstone/widgets/dashboard/top_selling_grid.dart';
 import 'package:capstone/widgets/dashboard/welcome_carousel.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 10),
             DashboardCategoryList(key: key),
             const SizedBox(height: 10),
-            TopSettingGrid(key: key)
+            TopSellingGrid(key: key)
           ],
         ),
       ),

@@ -7,10 +7,16 @@ import 'package:capstone/widgets/products/cloth_size_box.dart';
 import 'package:capstone/widgets/products/image_container.dart';
 import 'package:flutter/material.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   static const String path = 'product';
   const ProductScreen({super.key});
 
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  String selectedSize = 'S';
   @override
   Widget build(BuildContext context) {
     Product product = ModalRoute.of(context)!.settings.arguments as Product;
@@ -27,12 +33,18 @@ class ProductScreen extends StatelessWidget {
                 ClothInfoBox(product: product),
               ],
             ),
-            const ClothSizeBox(),
+            ClothSizeBox(onSizeSelected: (size) {
+              setState(() {
+                selectedSize = size;
+              });
+            }),
             DescriptionBox(product: product),
-            const AddToCart()
+            AddToCart(size: selectedSize, product: product)
           ],
         ),
       ),
     );
   }
 }
+
+typedef OnSizeChange = Function(String value);

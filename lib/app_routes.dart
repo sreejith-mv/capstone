@@ -1,9 +1,13 @@
+import 'package:capstone/screens/address.dart';
+import 'package:capstone/screens/card.dart';
 import 'package:capstone/screens/cart.dart';
 import 'package:capstone/screens/category.dart';
+import 'package:capstone/screens/checkout.dart';
 import 'package:capstone/screens/dashboard.dart';
 import 'package:capstone/screens/forget_password.dart';
 import 'package:capstone/screens/login.dart';
 import 'package:capstone/screens/onboarding.dart';
+import 'package:capstone/screens/order.dart';
 import 'package:capstone/screens/product.dart';
 import 'package:capstone/screens/profile.dart';
 import 'package:capstone/screens/registration.dart';
@@ -55,6 +59,27 @@ class AppRoutes {
       case ForgetPasswordScreen.path:
         return MaterialPageRoute(
           builder: (context) => const ForgetPasswordScreen(),
+          settings: settings,
+        );
+      case CheckoutScreen.path:
+        return MaterialPageRoute(
+          builder: (context) => const CheckoutScreen(),
+          settings: settings,
+        );
+      case CardScreen.path:
+        return MaterialPageRoute(
+          builder: (context) => const CardScreen(),
+          settings: settings,
+        );
+
+      case AddressScreen.path:
+        return MaterialPageRoute(
+          builder: (context) => const AddressScreen(),
+          settings: settings,
+        );
+      case Orders.path:
+        return MaterialPageRoute(
+          builder: (context) => const Orders(),
           settings: settings,
         );
       default:

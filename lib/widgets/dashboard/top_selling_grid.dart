@@ -3,8 +3,8 @@ import 'package:capstone/widgets/common/product_item_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class TopSettingGrid extends StatelessWidget {
-  TopSettingGrid({super.key});
+class TopSellingGrid extends StatelessWidget {
+  TopSellingGrid({super.key});
   final CollectionReference categories =
       FirebaseFirestore.instance.collection('products');
 
@@ -24,6 +24,7 @@ class TopSettingGrid extends StatelessWidget {
             children: snapshot.data!.docs.map<Widget>((DocumentSnapshot doc) {
               return ProductItemCard(
                 product: Product(
+                  id: doc.id,
                   categoryId: doc['catagoryId'],
                   description: doc['description'],
                   image: doc['image'],

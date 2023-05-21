@@ -53,98 +53,100 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Form(
           key: _formKey,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  width: MediaQuery.of(context).size.width / 3,
-                ),
-                const Text(
-                  'Welcome to Capstone',
-                  style: TextStyle(color: brandColor, fontSize: 24),
-                ),
-                const SizedBox(height: 40),
-                const Text(
-                  'Login to your account',
-                  style: TextStyle(color: brandColor, fontSize: 16),
-                ),
-                const SizedBox(height: 20),
-                CapstoneTextFormField(
-                  hintText: 'Email',
-                  controller: _usernameController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please provide am email';
-                    }
-                    bool emailFormatValidation =
-                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                            .hasMatch(value);
-                    if (!emailFormatValidation) {
-                      return "Please provide valid email";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                CapstoneTextFormField(
-                    hintText: 'Password',
-                    controller: _passwordController,
-                    obscureText: true,
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/logo.png',
+                    width: MediaQuery.of(context).size.width / 3,
+                  ),
+                  const Text(
+                    'Welcome to Capstone',
+                    style: TextStyle(color: brandColor, fontSize: 24),
+                  ),
+                  const SizedBox(height: 40),
+                  const Text(
+                    'Login to your account',
+                    style: TextStyle(color: brandColor, fontSize: 16),
+                  ),
+                  const SizedBox(height: 20),
+                  CapstoneTextFormField(
+                    hintText: 'Email',
+                    controller: _usernameController,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please provide a Password';
+                        return 'Please provide am email';
+                      }
+                      bool emailFormatValidation =
+                          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value);
+                      if (!emailFormatValidation) {
+                        return "Please provide valid email";
                       }
                       return null;
-                    }),
-                const SizedBox(height: 30),
-                CapstoneElevatedButton(
-                    text: 'Login', onPressed: () => _login()),
-                const SizedBox(height: 16),
-                _asyncFormErrorMessage.isNotEmpty
-                    ? Text(_asyncFormErrorMessage,
-                        style: const TextStyle(color: Colors.red))
-                    : const Text(''),
-                const SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Forgot password?',
-                      style: TextStyle(color: brandColor, fontSize: 16),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pushNamed(
-                          context, ForgetPasswordScreen.path),
-                      child: const Text(
-                        'Reset',
-                        style: TextStyle(
-                            color: brandColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  CapstoneTextFormField(
+                      hintText: 'Password',
+                      controller: _passwordController,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please provide a Password';
+                        }
+                        return null;
+                      }),
+                  const SizedBox(height: 30),
+                  CapstoneElevatedButton(
+                      text: 'Login', onPressed: () => _login()),
+                  const SizedBox(height: 16),
+                  _asyncFormErrorMessage.isNotEmpty
+                      ? Text(_asyncFormErrorMessage,
+                          style: const TextStyle(color: Colors.red))
+                      : const Text(''),
+                  const SizedBox(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Forgot password?',
+                        style: TextStyle(color: brandColor, fontSize: 16),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Don’t have an account?',
-                        style: TextStyle(color: brandColor, fontSize: 16)),
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, RegistrationScreen.path),
-                      child: const Text('Sign up',
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(
+                            context, ForgetPasswordScreen.path),
+                        child: const Text(
+                          'Reset',
                           style: TextStyle(
                               color: brandColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-              ],
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Don’t have an account?',
+                          style: TextStyle(color: brandColor, fontSize: 16)),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(
+                            context, RegistrationScreen.path),
+                        child: const Text('Sign up',
+                            style: TextStyle(
+                                color: brandColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

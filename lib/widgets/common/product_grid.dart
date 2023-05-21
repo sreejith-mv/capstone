@@ -29,6 +29,7 @@ class ProductGrid extends StatelessWidget {
             children: snapshot.data!.docs.map<Widget>((DocumentSnapshot doc) {
               return ProductItemCard(
                 product: Product(
+                  id: doc.id,
                   categoryId: doc['catagoryId'],
                   description: doc['description'],
                   image: doc['image'],

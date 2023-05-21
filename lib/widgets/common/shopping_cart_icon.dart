@@ -12,7 +12,7 @@ class ShoppingCartIcon extends StatefulWidget {
 }
 
 class _ShoppingCartIconState extends State<ShoppingCartIcon> {
-  num count = 0;
+  // num count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,34 +27,41 @@ class _ShoppingCartIconState extends State<ShoppingCartIcon> {
               final Map<String, dynamic> cartData =
                   snapshot.data!.data() as Map<String, dynamic>;
               final products = cartData['products'] ?? [];
-              setState(() => count = products.length);
+              // setState(() => count = products.length);
+              return Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, CartScreen.path);
+                    },
+                    icon: const Icon(Icons.shopping_cart),
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(10)),
+                      constraints:
+                          const BoxConstraints(minHeight: 20, minWidth: 20),
+                      child: Text(products.length.toString(),
+                          style:
+                              const TextStyle(color: brandLight, fontSize: 9),
+                          textAlign: TextAlign.center),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.shopping_cart));
             }
+          } else {
+            return IconButton(
+                onPressed: () {}, icon: const Icon(Icons.shopping_cart));
           }
-          return Stack(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, CartScreen.path);
-                },
-                icon: const Icon(Icons.shopping_cart),
-              ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(10)),
-                  constraints:
-                      const BoxConstraints(minHeight: 20, minWidth: 20),
-                  child: Text(count.toString(),
-                      style: const TextStyle(color: brandLight, fontSize: 9),
-                      textAlign: TextAlign.center),
-                ),
-              )
-            ],
-          );
         });
   }
 }
