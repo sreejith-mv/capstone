@@ -5,43 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class PaymentList extends StatefulWidget {
+class PaymentList extends StatelessWidget {
   const PaymentList({super.key});
-
-  @override
-  State<PaymentList> createState() => _PaymentListState();
-}
-
-class _PaymentListState extends State<PaymentList> {
-  String cardNumber = '';
-  String expiryDate = '';
-  String cardHolderName = '';
-  String cvvCode = '';
-  bool isCardExist = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _getCardInfo();
-  }
-
-  _getCardInfo() async {
-    DocumentSnapshot card = await FirebaseFirestore.instance
-        .collection('cards')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    if (card.exists) {
-      isCardExist = true;
-      final Map<String, dynamic> creditCardModel =
-          card.data() as Map<String, dynamic>;
-      setState(() {
-        cardNumber = creditCardModel['cardNumber'];
-        expiryDate = creditCardModel['expiryDate'];
-        cardHolderName = creditCardModel['cardHolderName'];
-        cvvCode = creditCardModel['cvvCode'];
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +21,32 @@ class _PaymentListState extends State<PaymentList> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
-        isCardExist
-            ? SizedBox(
+        StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('cards')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Text("Error occurred");
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final payment = snapshot.data!.data() != null
+                  ? snapshot.data!.data() as Map<String, dynamic>
+                  : {};
+
+              if (payment.isEmpty) {
+                return CapstoneDarkElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, CardScreen.path),
+                    text: 'Add Payment Method');
+              }
+
+              return SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +63,7 @@ class _PaymentListState extends State<PaymentList> {
                                   text: 'Card Holder Name: ',
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(text: cardHolderName),
+                              TextSpan(text: payment['cardHolderName']),
                             ],
                           ),
                         ),
@@ -88,7 +77,7 @@ class _PaymentListState extends State<PaymentList> {
                                       TextStyle(fontWeight: FontWeight.bold)),
                               TextSpan(
                                   text:
-                                      '${cardNumber.split(' ')[0]} XXXX XXXX ${cardNumber.split(' ')[3]}'),
+                                      '${payment['cardNumber'].split(' ')[0]} XXXX XXXX ${payment['cardNumber'].split(' ')[3]}'),
                             ],
                           ),
                         ),
@@ -100,7 +89,7 @@ class _PaymentListState extends State<PaymentList> {
                                   text: 'Expiry Date: ',
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(text: expiryDate),
+                              TextSpan(text: payment['expiryDate']),
                             ],
                           ),
                         ),
@@ -123,10 +112,8 @@ class _PaymentListState extends State<PaymentList> {
                     )
                   ],
                 ),
-              )
-            : CapstoneDarkElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, CardScreen.path),
-                text: 'Add Payment Method')
+              );
+            })
       ],
     );
   }

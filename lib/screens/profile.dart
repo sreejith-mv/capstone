@@ -12,7 +12,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CapstoneAppBar(title: ''),
+      appBar: const CapstoneAppBar(
+        title: '',
+        showProfile: false,
+      ),
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(

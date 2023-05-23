@@ -5,37 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class BillingAddress extends StatefulWidget {
+class BillingAddress extends StatelessWidget {
   const BillingAddress({super.key});
-
-  @override
-  State<BillingAddress> createState() => _BillingAddressState();
-}
-
-class _BillingAddressState extends State<BillingAddress> {
-  bool isAdded = false;
-  late final Map<String, dynamic> address;
-
-  @override
-  void initState() {
-    super.initState();
-    _getAddressInfo();
-  }
-
-  _getAddressInfo() async {
-    DocumentSnapshot card = await FirebaseFirestore.instance
-        .collection('address')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    if (card.exists) {
-      isAdded = true;
-      final Map<String, dynamic> addressModel =
-          card.data() as Map<String, dynamic>;
-      setState(() {
-        address = addressModel;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +21,32 @@ class _BillingAddressState extends State<BillingAddress> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
-        isAdded
-            ? SizedBox(
+        StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('address')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Text("Error occurred");
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final address = snapshot.data!.data() != null
+                  ? snapshot.data!.data() as Map<String, dynamic>
+                  : {};
+
+              if (address.isEmpty) {
+                return CapstoneDarkElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AddressScreen.path),
+                    text: 'Add Billing Address');
+              }
+
+              return SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,11 +77,8 @@ class _BillingAddressState extends State<BillingAddress> {
                     )
                   ],
                 ),
-              )
-            : CapstoneDarkElevatedButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, AddressScreen.path),
-                text: 'Add Billing Address')
+              );
+            })
       ],
     );
   }

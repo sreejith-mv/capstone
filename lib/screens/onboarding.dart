@@ -13,9 +13,11 @@ class OnboardingScreen extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/onboarding.jpg"),
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.3), BlendMode.darken),
+                image: const AssetImage("assets/images/onboarding.jpg"),
                 fit: BoxFit.cover),
           ),
         ),

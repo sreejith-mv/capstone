@@ -9,14 +9,15 @@ class Product {
   final num rating;
   final bool topSelling;
 
-  Product(
-      {required this.categoryId,
-      required this.id,
-      required this.description,
-      required this.image,
-      required this.name,
-      required this.offerPrice,
-      required this.price,
-      required this.rating,
-      required this.topSelling});
+  Product({
+    required this.categoryId,
+    required this.id,
+    required this.description,
+    required this.image,
+    required this.name,
+    required this.offerPrice,
+    required this.price,
+    required this.rating,
+    required this.topSelling,
+  });
 }

@@ -25,9 +25,9 @@ class ProductList extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        print(snapshot.data);
-        print(snapshot.data!.data());
-        final cartItems = snapshot.data!.data() as Map<String, dynamic>;
+        final cartItems = snapshot.data!.data() != null
+            ? snapshot.data!.data() as Map<String, dynamic>
+            : {};
 
         if (cartItems == null || cartItems.isEmpty) {
           return const Text("No item in cart.");
@@ -43,10 +43,7 @@ class ProductList extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final product = products[index];
 
-                    return CartProductItem(
-                      id: product['id'],
-                      product: product,
-                    );
+                    return CartProductItem(product: product);
                   }),
             ),
           ],

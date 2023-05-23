@@ -1,4 +1,4 @@
-import 'package:capstone/widgets/common/elevated_button.dart';
+import 'package:capstone/widgets/common/elevated_button_dark.dart';
 import 'package:capstone/widgets/common/text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,7 +91,7 @@ class _ForgetPasswordScreen extends State<ForgetPasswordScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                CapstoneElevatedButton(
+                CapstoneDarkElevatedButton(
                     text: 'Send Reset Password Link',
                     onPressed: () => _sendPasswordResetEmail()),
                 const SizedBox(height: 16),

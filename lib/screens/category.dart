@@ -1,6 +1,7 @@
 import 'package:capstone/widgets/common/app_bar.dart';
 import 'package:capstone/widgets/common/category_tile.dart';
 import 'package:capstone/widgets/common/product_grid.dart';
+import 'package:capstone/widgets/common/search_control.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -15,20 +16,28 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   String categoryId = '';
   bool isAllChanged = false;
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
     categoryId = !isAllChanged ? arguments['id'] : categoryId;
     return Scaffold(
       appBar: CapstoneAppBar(title: arguments['name'].toString()),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            arguments['id'] == "all" ? getCategoryList() : Container(),
-            ProductGrid(categoryId: categoryId)
-          ],
-        ),
+      body: Column(
+        children: [
+          CapstoneSearchTextField(controller: _searchController),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  arguments['id'] == "all" ? getCategoryList() : Container(),
+                  ProductGrid(categoryId: categoryId)
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

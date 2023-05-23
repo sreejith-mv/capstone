@@ -12,6 +12,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Capstone Fashion Store',
         theme: ThemeData(
           fontFamily: "LexendDeca",

@@ -5,24 +5,21 @@ import 'package:flutter/material.dart';
 
 class CartControls extends StatefulWidget {
   final Map<String, dynamic> product;
-  final String id;
   final int quantity;
   const CartControls(
-      {super.key,
-      required this.quantity,
-      required this.id,
-      required this.product});
+      {super.key, required this.quantity, required this.product});
 
   @override
   State<CartControls> createState() => _CartControlsState();
 }
 
 class _CartControlsState extends State<CartControls> {
-  int quantity = 0;
+  int quantity = 1;
+
   @override
   void initState() {
-    super.initState();
     quantity = widget.quantity;
+    super.initState();
   }
 
   _incasesQuantity() {
@@ -50,7 +47,7 @@ class _CartControlsState extends State<CartControls> {
       final Map<String, dynamic> cartData = cart.data() as Map<String, dynamic>;
       final products = cartData['products'] ?? [];
       for (var i = 0; i < products.length; i++) {
-        if (products[i]['id'] == widget.id) {
+        if (products[i]['id'] == widget.product['id']) {
           products[i]['quantity'] = quantity;
         }
       }
@@ -75,7 +72,7 @@ class _CartControlsState extends State<CartControls> {
             SizedBox(
                 width: 20,
                 child: Text(
-                  widget.quantity.toString(),
+                  quantity.toString(),
                   textAlign: TextAlign.center,
                 )),
             const SizedBox(width: 10),
@@ -84,7 +81,7 @@ class _CartControlsState extends State<CartControls> {
         ),
         const SizedBox(height: 5),
         Text(
-          '\$${widget.product['price'] * widget.quantity}',
+          '\$${widget.product['price'] * quantity}',
           style: const TextStyle(fontWeight: FontWeight.bold),
         )
       ],
@@ -93,7 +90,7 @@ class _CartControlsState extends State<CartControls> {
 
   GestureDetector quantityControl(method, IconData icon) {
     return GestureDetector(
-      onTap: method,
+      onTap: () => method(),
       child: Container(
         width: 30,
         height: 30,
